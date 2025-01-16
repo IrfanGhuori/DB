@@ -1,53 +1,30 @@
-# Welcome to Marei's DB class V 1.0
-MareiDB class is a simple query builder class in PHP to increase your productivity, you can't imagine how much time you're gonna save if you're using this class! .
+# Welcome to Marei's QueriesBuilderclass V 1.0
+MareiQueriesBuilderclass is a simple query builder class in PHP to increase your productivity, you can't imagine how much time you're gonna save if you're using this class!
 ## Features
-* Totally Secured :
-This DB class uses PDO prepared statements to provide high levels of protection against SQL Injection attacks
+* Secured :
+This QueriesBuilderclass uses PDO-prepared statements to provide high levels of protection against SQL Injection attacks
 * Easy Usage :
-The syntax is really simple, and there are many ways to do the same query, so you can use the way you like ;)
+The syntax is straightforward, and there are many ways to do the same query, so you can use it the way you like ;)
 * Well Documented :
-Everything you wanna know about this class is here and organized very well, so you can find it easily.
+Everything you need to know about this class is here, organized very well so you can find it easily.
 
 ## Usage
-After downloading the class from [here](https://raw.githubusercontent.com/mareimorsy/DB/master/DB.php) save it into your root directory and then open it to adjust the basic configurations for your DB connection like host, database name, DB username and DB password. And also you can easily define your current development environment to `development` or `production`.
-```php
-//current development environment
-"env" => "development",
-//Localhost
-"development" => [
-					"host" => "localhost",
-					"database" => "test",
-					"username" => "root",
-					"password" => ""
-				 ],
-//Server
-"production"  => [
-					"host" => "",
-					"database" => "",
-					"username" => "",
-					"password" => ""
-				 ]
+After downloading the class from [here](https://raw.githubusercontent.com/mareimorsy/DB/master/DB.php) save it into your root directory and then open it to adjust the basic configurations for your QueriesBuilderconnection like host, database name, QueriesBuilderusername and QueriesBuilderpassword. And also you can easily define your current development environment as `development` or `production`.
+
+$QueriesBuilder= DB::getInstance();
 ```
-To use the class, just include it into your project files like this
-```php
-include 'DB.php';
-```
-Then you have to instantiate the class like this
-```php
-$db = DB::getInstance();
-```
-Now, `$db` object is a new instance of DB class, we're gonna use this object to deal with our database, and you can create many objects as you want (don't worry about connections because i'm using Singleton design pattern so whenever you create new objects it returns the same connection) . 
+Now, the `$db` object is a new instance of the QueriesBuilderclass, we're gonna use this object to deal with our database, and you can create as many objects as you want (don't worry about connections because I'm using Singleton design pattern so whenever you create new objects it returns the same connection). 
 ### Insert values to a table
-use the `insert()` method to insert values to a table, and it takes 2 parameters : the first one is `$table_name` and the second one is an associative array `$fields[]` so the key of that array is the column name in the table and the value of that array is the value that you wanna insert at that column.
+use the `insert()` method to insert values to a table, and it takes 2 parameters: the first one is `$table_name` and the second one is an associative array `$fields[]` so the key of that array is the column name in the table and the value of that array is the value that you wanna insert at that column.
 ```php
-$db->insert('mytable',
+$db->insert('mytable,
 	[
 		'first_name' => 'Marei',
 		'last_name' => 'Morsy',
 		'age'	=> 22
 	]);
 ```
-To see the SQL query that have executed, use the `getSQL()` Method like this:
+To see the SQL query that has executed, use the `getSQL()` Method like this:
 ```php
 echo $db->getSQL();
 ```
@@ -72,9 +49,9 @@ echo $db->lastId();
 ```
 ### Update table values
 To update the table use `update()` method it holds 3 parameters : the first one is the table name, the second one is an associative array of the table values that you wanna update and the third parameter is optional, you can use it to state the update condition like WHERE clause in SQL.
-DB class provides so many ways to do the same queries for example : the third parameter in `update()` method you can do one of the following methods : 
+QueriesBuilderclass provides so many ways to do the same queries for example : the third parameter in `update()` method you can do one of the following methods : 
 ####Passing the id
-You can pass the `$id` as a third parameter and DB class will understand that there's a field in the table called `id` and you wanna update the record that its id is the value of `$id` like this : 
+You can pass the `$id` as a third parameter and QueriesBuilderclass will understand that there's a field in the table called `id` and you wanna update the record that its id is the value of `$id` like this : 
 ```php
 $db->update('mytable',
 	[
@@ -89,7 +66,7 @@ UPDATE `mytable` SET `first_name` = ?, `last_name` = ?, `age` = ? WHERE `mytable
 ```
 but, what if the column name was not id?
 ####Passing the column name and value
-you can pass an array of two items to `update` method as a third parameter : the first item in the array is the column name and the second item is the column value. The `update()` method in DB class will understand that you wanna update the table where the column name is equal to the value. Like this : 
+you can pass an array of two items to `update` method as a third parameter : the first item in the array is the column name and the second item is the column value. The `update()` method in QueriesBuilderclass will understand that you wanna update the table where the column name is equal to the value. Like this : 
 ```php
 $db->update('mytable',
 	[
@@ -328,7 +305,7 @@ To get users as an array
 $users = $db->table("users")->get()->toJSON();
 echo $users;
 ```
-To get users as JSON and if you just echo the result, Marei DB class is smart enough to understand that you want to return a JSON, so you can get the same result in one single line like this :
+To get users as JSON and if you just echo the result, Marei QueriesBuilderclass is smart enough to understand that you want to return a JSON, so you can get the same result in one single line like this :
 ```php
 echo $db->table("users")->get();
 ```
